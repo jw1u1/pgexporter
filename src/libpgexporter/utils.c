@@ -335,7 +335,7 @@ pgexporter_read_byte(void* data)
 uint8_t
 pgexporter_read_uint8(void* data)
 {
-   return (uint8_t)*((char*)data);
+   return (uint8_t) * ((char*)data);
 }
 
 int16_t

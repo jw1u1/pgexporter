@@ -583,6 +583,27 @@ metrics:
     - name: autoanalyze_count
       type: counter
       description: Number of times this table has been analyzed by autoanalyze
+- tag: pg_stat_user_tables_light
+  collector: stat_user_tables_light
+  sort: data
+  database: all
+  queries:
+  - query: SELECT schemaname, relname, n_live_tup, n_dead_tup, CASE WHEN n_live_tup > 0 THEN ROUND((n_dead_tup::numeric / n_live_tup::numeric) * 100, 2) ELSE 0 END AS dead_rows_pct FROM pg_stat_user_tables ORDER BY n_dead_tup DESC;
+    version: 13
+    columns:
+    - name: schemaname
+      type: label
+    - name: relname
+      type: label
+    - name: n_live_tup
+      type: gauge
+      description: Estimated number of live rows
+    - name: n_dead_tup
+      type: gauge
+      description: Estimated number of dead rows
+    - name: dead_rows_pct
+      type: gauge
+      description: Percentage of dead rows relative to live rows
 - tag: pg_table_ratio
   collector: table_activity_ratio
   sort: data

@@ -191,7 +191,7 @@ parse_alerts_yaml(FILE* file, struct configuration* config, bool merge)
                }
                else if (!strcmp(current_key, "operator"))
                {
-                  current_alert.operator = parse_alert_operator(val);
+                  current_alert.operator= parse_alert_operator(val);
                   overrides |= ALERT_OVERRIDE_OPERATOR;
                }
                else if (!strcmp(current_key, "threshold"))
@@ -278,7 +278,7 @@ parse_alerts_yaml(FILE* file, struct configuration* config, bool merge)
                            }
                            if (overrides & ALERT_OVERRIDE_OPERATOR)
                            {
-                              config->alerts[i].operator = current_alert.operator;
+                              config->alerts[i].operator= current_alert.operator;
                            }
                            if (overrides & ALERT_OVERRIDE_THRESHOLD)
                            {

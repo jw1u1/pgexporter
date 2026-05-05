@@ -925,7 +925,7 @@ pgexporter_management_create_outcome_success(struct json* json, time_t start_tim
 
    elapsed = pgexporter_get_timestamp_string(start_time, end_time, &total_seconds);
 
-   pgexporter_json_put(r, MANAGEMENT_ARGUMENT_STATUS, (uintptr_t)true, ValueBool);
+   pgexporter_json_put(r, MANAGEMENT_ARGUMENT_STATUS, (uintptr_t) true, ValueBool);
    pgexporter_json_put(r, MANAGEMENT_ARGUMENT_TIME, (uintptr_t)elapsed, ValueString);
 
    pgexporter_json_put(json, MANAGEMENT_CATEGORY_OUTCOME, (uintptr_t)r, ValueJSON);
@@ -957,7 +957,7 @@ pgexporter_management_create_outcome_failure(struct json* json, int32_t error, s
       goto error;
    }
 
-   pgexporter_json_put(r, MANAGEMENT_ARGUMENT_STATUS, (uintptr_t)false, ValueBool);
+   pgexporter_json_put(r, MANAGEMENT_ARGUMENT_STATUS, (uintptr_t) false, ValueBool);
    pgexporter_json_put(r, MANAGEMENT_ARGUMENT_ERROR, (uintptr_t)error, ValueInt32);
 
    pgexporter_json_put(json, MANAGEMENT_CATEGORY_OUTCOME, (uintptr_t)r, ValueJSON);
