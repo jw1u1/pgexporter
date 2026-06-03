@@ -26,56 +26,61 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef PGEXPORTER_YAMLCONFIGURATION_H
-#define PGEXPORTER_YAMLCONFIGURATION_H
+#ifndef PGEXPORTER_HISTORY_SQLITE_H
+#define PGEXPORTER_HISTORY_SQLITE_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <pgexporter.h>
-
-#include <yaml.h>
-
-/**
- * Read the custom configuration from YAML file provided by user.
- * @param shmem The shared memory segment
- * @return 0 upon success, otherwise 1
- */
-int
-pgexporter_read_metrics_configuration(void* shmem);
+#include <history.h>
+#include <time.h>
 
 /**
- * @brief Read the internal YAML configuration `INTERNAL_YAML` and load the
- * metrics in the config.
- *
- * @param config The configuration where it will be loaded
- * @param start true if it will reset the `number_of_metrics` in `config` to 0 and start counting from there
- * @return 0 upon success, otherwise 1
+ * Open (or create) the SQLite database file and initialise the schema.
+ * The path is taken from config->history_path.
+ * @return 0 on success, 1 on failure
  */
 int
-pgexporter_read_internal_yaml_metrics(struct configuration* config, bool start);
+pgexporter_history_sqlite_init(void);
 
 /**
- * Read and load YAML configuration from file pointer.
- * @param prometheus The array of data structures where the YAML configuration is loaded
- * @param prometheus_idx The index of the data structure in the array
- * @param number_of_metrics The number of metrics the configuration has. This value will be set by the function.
- * @param file File pointer
- * @return 0 upon success, otherwise 1
+ * Insert a batch of records inside a single transaction.
+ * @param records Array of history_record structs
+ * @param count   Number of records
+ * @return 0 on success, 1 on failure
  */
 int
-pgexporter_read_yaml_from_file_pointer(struct prometheus* prometheus, int prometheus_idx, int* number_of_metrics, FILE* file);
+pgexporter_history_sqlite_write_batch(struct history_record* records, int count);
 
 /**
- * Find and load a specific extension's YAML file
- * @param extensions_path The base extensions directory path
- * @param extension_name The name of the extension to find
- * @param config The configuration to load into
- * @return 0 on success, 1 on error (file not found or parse error)
+ * Query records for a metric within [start, end].
+ * @param metric      Metric name
+ * @param start       Start timestamp (inclusive)
+ * @param end         End timestamp (inclusive)
+ * @param records_out Pointer to a caller-freeable array of results; may be NULL
+ * @param count_out   Number of returned records
+ * @return 0 on success, 1 on failure
  */
 int
-pgexporter_load_single_extension_yaml(char* extensions_path, char* extension_name, struct configuration* config);
+pgexporter_history_sqlite_query_range(const char* metric, time_t start, time_t end,
+                                      struct history_record** records_out, int* count_out);
+
+/**
+ * Delete records whose timestamp is older than config->history_retention.
+ * @return 0 on success, 1 on failure
+ */
+int
+pgexporter_history_sqlite_prune(void);
+
+/**
+ * Close the SQLite database connection.
+ * @return 0 on success, 1 on failure
+ */
+int
+pgexporter_history_sqlite_shutdown(void);
+
+extern const struct history_backend_ops pgexporter_history_sqlite_ops;
 
 #ifdef __cplusplus
 }
