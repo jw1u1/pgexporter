@@ -192,10 +192,10 @@ typedef struct pgexporter_time
 } pgexporter_time_t;
 
 #define PGEXPORTER_TIME_MS(v)    ((pgexporter_time_t){.ms = (int64_t)(v)})
-#define PGEXPORTER_TIME_SEC(v)   ((pgexporter_time_t){.ms = (int64_t)(v) * 1000LL})
-#define PGEXPORTER_TIME_MIN(v)   ((pgexporter_time_t){.ms = (int64_t)(v) * 60000LL})
-#define PGEXPORTER_TIME_HOUR(v)  ((pgexporter_time_t){.ms = (int64_t)(v) * 3600000LL})
-#define PGEXPORTER_TIME_DAY(v)   ((pgexporter_time_t){.ms = (int64_t)(v) * 86400000LL})
+#define PGEXPORTER_TIME_SEC(v)   ((pgexporter_time_t){.ms = (int64_t)(v)*1000LL})
+#define PGEXPORTER_TIME_MIN(v)   ((pgexporter_time_t){.ms = (int64_t)(v)*60000LL})
+#define PGEXPORTER_TIME_HOUR(v)  ((pgexporter_time_t){.ms = (int64_t)(v)*3600000LL})
+#define PGEXPORTER_TIME_DAY(v)   ((pgexporter_time_t){.ms = (int64_t)(v)*86400000LL})
 
 #define PGEXPORTER_TIME_DISABLED ((pgexporter_time_t){.ms = 0})
 #define PGEXPORTER_TIME_INFINITE ((pgexporter_time_t){.ms = -1})

@@ -1501,7 +1501,7 @@ error:
          outcome_section = (struct json*)pgexporter_json_get(full_response, MANAGEMENT_CATEGORY_OUTCOME);
          if (outcome_section)
          {
-            pgexporter_json_put(outcome_section, MANAGEMENT_ARGUMENT_STATUS, (uintptr_t)false, ValueBool);
+            pgexporter_json_put(outcome_section, MANAGEMENT_ARGUMENT_STATUS, (uintptr_t) false, ValueBool);
          }
          // Set empty response section
          pgexporter_json_put(full_response, MANAGEMENT_CATEGORY_RESPONSE, (uintptr_t)filtered_response, ValueJSON);
@@ -1509,7 +1509,7 @@ error:
       }
       else
       {
-         pgexporter_json_put(filtered_response, "Outcome", (uintptr_t)false, ValueBool);
+         pgexporter_json_put(filtered_response, "Outcome", (uintptr_t) false, ValueBool);
          *r = (uintptr_t)filtered_response;
       }
       free(config_value);

@@ -71,8 +71,8 @@ MCTF_TEST(test_deque_add_poll)
 
    MCTF_ASSERT(!pgexporter_deque_create(false, &dq), cleanup, "deque creation failed");
    MCTF_ASSERT(!pgexporter_deque_add(dq, NULL, (uintptr_t)-1, ValueInt32), cleanup, "add int failed");
-   MCTF_ASSERT(!pgexporter_deque_add(dq, NULL, (uintptr_t)true, ValueBool), cleanup, "add bool failed");
-   MCTF_ASSERT(!pgexporter_deque_add(dq, NULL, (uintptr_t)"value1", ValueString), cleanup, "add string failed");
+   MCTF_ASSERT(!pgexporter_deque_add(dq, NULL, (uintptr_t) true, ValueBool), cleanup, "add bool failed");
+   MCTF_ASSERT(!pgexporter_deque_add(dq, NULL, (uintptr_t) "value1", ValueString), cleanup, "add string failed");
    MCTF_ASSERT_INT_EQ(dq->size, 3, cleanup, "deque size should be 3");
 
    MCTF_ASSERT_INT_EQ((int)pgexporter_deque_peek(dq, NULL), -1, cleanup, "peek failed");
@@ -109,8 +109,8 @@ MCTF_TEST(test_deque_add_poll_last)
 
    MCTF_ASSERT(!pgexporter_deque_create(false, &dq), cleanup, "deque creation failed");
    pgexporter_deque_add(dq, NULL, 0, ValueNone);
-   MCTF_ASSERT(!pgexporter_deque_add(dq, NULL, (uintptr_t)"value1", ValueString), cleanup, "add string failed");
-   MCTF_ASSERT(!pgexporter_deque_add(dq, NULL, (uintptr_t)true, ValueBool), cleanup, "add bool failed");
+   MCTF_ASSERT(!pgexporter_deque_add(dq, NULL, (uintptr_t) "value1", ValueString), cleanup, "add string failed");
+   MCTF_ASSERT(!pgexporter_deque_add(dq, NULL, (uintptr_t) true, ValueBool), cleanup, "add bool failed");
    MCTF_ASSERT(!pgexporter_deque_add(dq, NULL, (uintptr_t)-1, ValueInt32), cleanup, "add int failed");
    MCTF_ASSERT_INT_EQ(dq->size, 3, cleanup, "deque size should be 3");
 
@@ -146,8 +146,8 @@ MCTF_TEST(test_deque_clear)
    pgexporter_test_setup();
 
    MCTF_ASSERT(!pgexporter_deque_create(false, &dq), cleanup, "deque creation failed");
-   MCTF_ASSERT(!pgexporter_deque_add(dq, NULL, (uintptr_t)"value1", ValueString), cleanup, "add string failed");
-   MCTF_ASSERT(!pgexporter_deque_add(dq, NULL, (uintptr_t)true, ValueBool), cleanup, "add bool failed");
+   MCTF_ASSERT(!pgexporter_deque_add(dq, NULL, (uintptr_t) "value1", ValueString), cleanup, "add string failed");
+   MCTF_ASSERT(!pgexporter_deque_add(dq, NULL, (uintptr_t) true, ValueBool), cleanup, "add bool failed");
    MCTF_ASSERT(!pgexporter_deque_add(dq, NULL, (uintptr_t)-1, ValueInt32), cleanup, "add int failed");
    MCTF_ASSERT_INT_EQ(dq->size, 3, cleanup, "deque size should be 3");
 
@@ -170,8 +170,8 @@ MCTF_TEST(test_deque_remove)
    pgexporter_test_setup();
 
    MCTF_ASSERT(!pgexporter_deque_create(false, &dq), cleanup, "deque creation failed");
-   MCTF_ASSERT(!pgexporter_deque_add(dq, "tag1", (uintptr_t)"value1", ValueString), cleanup, "add string failed");
-   MCTF_ASSERT(!pgexporter_deque_add(dq, "tag2", (uintptr_t)true, ValueBool), cleanup, "add bool failed");
+   MCTF_ASSERT(!pgexporter_deque_add(dq, "tag1", (uintptr_t) "value1", ValueString), cleanup, "add string failed");
+   MCTF_ASSERT(!pgexporter_deque_add(dq, "tag2", (uintptr_t) true, ValueBool), cleanup, "add bool failed");
    MCTF_ASSERT(!pgexporter_deque_add(dq, "tag2", (uintptr_t)-1, ValueInt32), cleanup, "add int failed");
    MCTF_ASSERT_INT_EQ(dq->size, 3, cleanup, "deque size should be 3");
 
@@ -418,9 +418,9 @@ MCTF_TEST(test_deque_sort_mixed_and_edge_cases)
    MCTF_ASSERT(!pgexporter_deque_create(false, &dq), cleanup, "custom deque creation failed");
 
    pgexporter_deque_add(dq, "tag1", (uintptr_t)100, ValueInt32);
-   pgexporter_deque_add(dq, "tag2", (uintptr_t)"zebra", ValueString);
+   pgexporter_deque_add(dq, "tag2", (uintptr_t) "zebra", ValueString);
    pgexporter_deque_add(dq, "tag3", (uintptr_t)5, ValueInt32);
-   pgexporter_deque_add(dq, "tag4", (uintptr_t)"apple", ValueString);
+   pgexporter_deque_add(dq, "tag4", (uintptr_t) "apple", ValueString);
 
    pgexporter_deque_add(dq, NULL, (uintptr_t)50, ValueInt32);
 

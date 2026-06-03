@@ -573,7 +573,7 @@ fill_value(char* str, char* key, uint64_t* index, struct json* o)
       }
       if (val == NULL)
       {
-         json_add(o, key, (uintptr_t)"", ValueString);
+         json_add(o, key, (uintptr_t) "", ValueString);
       }
       else
       {
@@ -825,7 +825,7 @@ pgexporter_json_put_enum_value(struct json* item, char* key, int value, int (*to
    }
    else
    {
-      pgexporter_json_put(nested, "string_value", (uintptr_t)"unknown", ValueString);
+      pgexporter_json_put(nested, "string_value", (uintptr_t) "unknown", ValueString);
    }
 
    pgexporter_json_put(item, key, (uintptr_t)nested, ValueJSON);
@@ -851,7 +851,7 @@ pgexporter_json_put_time_value(struct json* item, char* key, pgexporter_time_t v
    }
    else
    {
-      pgexporter_json_put(nested, "string_value", (uintptr_t)"unknown", ValueString);
+      pgexporter_json_put(nested, "string_value", (uintptr_t) "unknown", ValueString);
    }
 
    pgexporter_json_put(item, key, (uintptr_t)nested, ValueJSON);
@@ -878,7 +878,7 @@ pgexporter_json_put_size_value(struct json* item, char* key, uint64_t value)
    }
    else
    {
-      pgexporter_json_put(nested, "string_value", (uintptr_t)"unknown", ValueString);
+      pgexporter_json_put(nested, "string_value", (uintptr_t) "unknown", ValueString);
    }
 
    pgexporter_json_put(item, key, (uintptr_t)nested, ValueJSON);
